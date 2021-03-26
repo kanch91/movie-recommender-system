@@ -215,23 +215,7 @@ def model_for_users(users_data):
         users_data: DataFrame of merged movies, items, and users based on movie_id
     """
 
-    i = 0
-    model_data_for_users = pd.DataFrame(columns=m_cols)
-
-    for _, curr_value in users_data.iterrows():
-
-        # Get user movies based on user
-        user_movies = items_merged.loc[items_merged['user_id'] == curr_value['user_id']]
-
-        # Get feature list for all movies of one user
-        feature_array = gim.gim_final(user_movies, curr_value['user_id'])
-        feature_array[NO_OF_GENRES] = curr_value['age']
-        feature_array[NO_OF_GENRES + 1] = curr_value['user_id']
-
-        # Save current feature values in model data
-        model_data_for_users.loc[i] = feature_array
-        i = i + 1
-    return model_data_for_users
+ 
 
 
 def recommend(nearest_neighbours, test_users_data):
